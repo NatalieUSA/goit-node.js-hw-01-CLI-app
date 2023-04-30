@@ -1,4 +1,12 @@
-console.log('starkkkkkkkkkkkRT 1111111111');
+// const contacts = require('./contacts');
+// console.log(contacts);
+
+const {
+  listContacts,
+  getContactById,
+  removeContact,
+  addContact,
+} = require('./contacts');
 
 // const { Command } = require('commander');
 // const program = new Command();
@@ -14,27 +22,31 @@ console.log('starkkkkkkkkkkkRT 1111111111');
 // const argv = program.opts();
 
 // TODO: рефакторить
-function invokeAction({ action, id, name, email, phone }) {
+const invokeAction = async ({ action, id, name, email, phone }) => {
   switch (action) {
     case 'list':
-      // ...
+      const contacts = await listContacts();
+      return console.log(contacts);
       break;
 
     case 'get':
-      // ... id
+      const contact = await getContactById(id);
+      return console.log(contact);
       break;
 
-    case 'add':
-      // ... name email phone
-      break;
+    // case 'add':
+    //   // ... name email phone
+    //   break;
 
-    case 'remove':
-      // ... id
-      break;
+    // case 'remove':
+    //   // ... id
+    //   break;
 
-    default:
+    // default:
     //   console.warn('\x1B[31m Unknown action type!');
   }
-}
+};
 
 // invokeAction(argv);
+// invokeAction({ action: 'list' });
+invokeAction({ action: 'get', id: 'AeHIrLTr6JkxGE6SN-0Rw' });
