@@ -1,3 +1,5 @@
+const { program } = require('commander');
+
 const {
   listContacts,
   getContactById,
@@ -5,20 +7,16 @@ const {
   addContact,
 } = require('./contacts');
 
-// const { Command } = require('commander');
-// const program = new Command();
-// program
-//   .option('-a, --action <type>', 'choose action')
-//   .option('-i, --id <type>', 'user id')
-//   .option('-n, --name <type>', 'user name')
-//   .option('-e, --email <type>', 'user email')
-//   .option('-p, --phone <type>', 'user phone');
+program
+  .option('-a, --action <type>', 'choose action')
+  .option('-i, --id <type>', 'user id')
+  .option('-n, --name <type>', 'user name')
+  .option('-e, --email <type>', 'user email')
+  .option('-p, --phone <type>', 'user phone');
 
-// program.parse(process.argv);
+program.parse(process.argv);
+const argv = program.opts();
 
-// const argv = program.opts();
-
-// TODO: рефакторить
 const invokeAction = async ({ action, id, name, email, phone }) => {
   switch (action) {
     case 'list':
@@ -49,17 +47,4 @@ const invokeAction = async ({ action, id, name, email, phone }) => {
   }
 };
 
-// invokeAction(argv);
-// invokeAction({ action: 'list' });
-// invokeAction({ action: 'get', id: 'AeHIrLTr6JkxGE6SN-0Rw' });
-// invokeAction({
-//   action: 'add',
-//   name: 'Monica Belucci',
-//   email: 'belucci@gmail.com',
-//   phone: '+1 (773) 289-73-09',
-// });
-const id = 'drsAJ4SHPYqZeG-83QTVW';
-invokeAction({
-  action: 'remove',
-  id,
-});
+invokeAction(argv);
